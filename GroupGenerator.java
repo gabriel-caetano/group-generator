@@ -12,7 +12,7 @@ public class GroupGenerator {
         this.students = students;
         this.studentsOutOfGroup = new ArrayList<TeamMate>();
         this.groups = new ArrayList<ArrayList<TeamMate>>();
-        groupSize = 2;
+        groupSize = 2; // duplas por padrão
     }
 
     GroupGenerator(ArrayList<TeamMate> students, int size)  {
@@ -25,7 +25,7 @@ public class GroupGenerator {
     public void printGroups() {
         int i = 1;
         for (ArrayList<TeamMate> group : groups) {
-            String members = "grupo " + i;
+            String members = "Grupo " + i;
             for (TeamMate mate : group) {
                 members += ", " + mate.getName();
             }
@@ -40,10 +40,11 @@ public class GroupGenerator {
             studentsOutOfGroup.add(student);
         }
         // cria todos os grupos com o numero de alunos definido
-        while (studentsOutOfGroup.size() > groupSize) {
+        while (studentsOutOfGroup.size() >= groupSize) {
             ArrayList<TeamMate> group = generateGroup(groupSize);
             groups.add(group);
         }
+
         // se sobrar alunos restantes distribui entre os grupos criados
         while(studentsOutOfGroup.size() > 0) {
             for (int i = 0; i < groups.size(); i++) {
